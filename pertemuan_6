@@ -1,0 +1,53 @@
+# inheritance_lab.py
+
+# Parent Class
+class A:
+    def __init__(self):
+        print("Constructor Kelas A")
+
+    def info(self):
+        print("Method dari Kelas A")
+
+
+# Child Class B mewarisi A
+class B(A):
+    def __init__(self):
+        print("Constructor Kelas B")
+        super().__init__()
+
+    def info(self):
+        print("Method dari Kelas B")
+        super().info()
+
+
+# Child Class C mewarisi A
+class C(A):
+    def __init__(self):
+        print("Constructor Kelas C")
+        super().__init__()
+
+    def info(self):
+        print("Method dari Kelas C")
+        super().info()
+
+
+# Child Class D mewarisi B dan C
+# Ini membentuk Diamond Problem
+class D(B, C):
+    def __init__(self):
+        print("Constructor Kelas D")
+        super().__init__()
+
+    def info(self):
+        print("Method dari Kelas D")
+        super().info()
+
+
+# Membuat objek
+obj = D()
+
+print("\nUrutan Method Resolution Order (MRO):")
+print(D.__mro__)
+
+print("\nPemanggilan method info():")
+obj.info()
