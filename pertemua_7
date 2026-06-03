@@ -1,0 +1,44 @@
+# Parent Class
+class AlatPembayaran:
+    def __init__(self, nama_pengguna):
+        self.nama_pengguna = nama_pengguna
+
+    def proses_bayar(self, jumlah):
+        print(f"{self.nama_pengguna} melakukan pembayaran sebesar Rp{jumlah}")
+
+
+# Child Class 1
+class KartuKredit(AlatPembayaran):
+    def proses_bayar(self, jumlah):
+        print(f"[Kartu Kredit] {self.nama_pengguna} membayar Rp{jumlah} menggunakan kartu kredit.")
+
+
+# Child Class 2
+class EWallet(AlatPembayaran):
+    def proses_bayar(self, jumlah):
+        print(f"[E-Wallet] {self.nama_pengguna} membayar Rp{jumlah} menggunakan e-wallet.")
+
+
+# Child Class tambahan
+class TransferBank(AlatPembayaran):
+    def proses_bayar(self, jumlah):
+        print(f"[Transfer Bank] {self.nama_pengguna} mentransfer Rp{jumlah} melalui bank.")
+
+
+# Fungsi Duck Typing
+def jalankan_transaksi(objek, jumlah):
+    # Tidak peduli objek berasal dari class apa
+    # Yang penting memiliki method proses_bayar()
+    objek.proses_bayar(jumlah)
+
+
+# Membuat objek dari class berbeda
+kartu = KartuKredit("Andi")
+ewallet = EWallet("Budi")
+transfer = TransferBank("Citra")
+
+
+# Demonstrasi Duck Typing
+jalankan_transaksi(kartu, 150000)
+jalankan_transaksi(ewallet, 75000)
+jalankan_transaksi(transfer, 200000)
