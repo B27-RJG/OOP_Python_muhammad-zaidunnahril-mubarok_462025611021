@@ -1,0 +1,43 @@
+# Custom Exception
+class SaldoTidakCukupError(Exception):
+    """Exception untuk saldo yang tidak mencukupi"""
+    pass
+
+
+# Class Utama
+class RekeningBank:
+    def __init__(self, nama_pemilik, saldo):
+        self.nama_pemilik = nama_pemilik
+        self.saldo = saldo
+
+    def tarik_uang(self, jumlah):
+        # Validasi jumlah penarikan
+        if jumlah <= 0:
+            raise ValueError("Jumlah penarikan harus lebih dari 0.")
+
+        # Memicu Custom Exception
+        if jumlah > self.saldo:
+            raise SaldoTidakCukupError(
+                f"Saldo tidak mencukupi. Saldo saat ini: Rp{self.saldo}"
+            )
+
+        self.saldo -= jumlah
+        print(f"Penarikan berhasil sebesar Rp{jumlah}")
+        print(f"Sisa saldo: Rp{self.saldo}")
+
+
+# Program Utama
+try:
+    rekening = RekeningBank("Ahmad", 10000000)
+
+    jumlah_tarik = int(input("Masukkan jumlah penarikan: Rp"))
+    rekening.tarik_uang(jumlah_tarik)
+
+except SaldoTidakCukupError as e:
+    print("ERROR:", e)
+
+except ValueError as e:
+    print("INPUT TIDAK VALID:", e)
+
+except Exception as e:
+    print("Terjadi kesalahan:", e)
